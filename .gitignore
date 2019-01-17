@@ -1,0 +1,3 @@
+*.exe
+scripts/*.js
+node_modules
