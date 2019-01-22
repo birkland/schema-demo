@@ -5,6 +5,32 @@
     "description": "Repository-specific schema",
     "type": "object",
     "properties": {
-        "authors": {"$ref": "http://localhost:8080/schemas/global_schema.json#/properties/authors"}
+        "title": {
+            "$ref": "http://localhost:8080/schemas/global_schema.json#/properties/title"
+        },
+        "authors": {
+            "$ref": "http://localhost:8080/schemas/global_schema.json#/properties/authors"
+        },
+        "abstract": {
+            "$ref": "http://localhost:8080/schemas/global_schema.json#/properties/abstract"
+        }
+    },
+    "options": {
+        "fields": {
+            "title": {
+                "hidden": false,
+                "helper": "yo"
+            },
+            "authors": {
+                "hidden": false
+            },
+            "abstract": {
+                "type": "textarea",
+                "rows": 2,
+                "label": "Abstract (optional)",
+                "placeholder": "Enter abstract",
+                "hidden": false
+            }
+        }
     }
 }

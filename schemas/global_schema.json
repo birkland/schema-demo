@@ -64,27 +64,22 @@
             "type": "string"
         }
     },
-    "definitions": {
-        "authors": {
-            "title": "manuscript authors",
-            "type": "array",
-            "items": {
-                "title": "Author",
-                "type": "object",
-                "properties": {
-                  "author": {
-                    "title": "name",
-                    "type": "string"
-                  },
-                  "orcid": {
-                    "title": "ORCiD",
-                    "type": "string"
-                  }
-                },
-                "required": [ "author" ]
-            },
-            "minItems": 1,
-            "uniqueItems": true
+    "options": {
+        "fields": {
+          "title": {
+            "hidden": false,
+            "helper": "yo"
+          },
+          "authors": {
+            "hidden": false
+          },
+          "abstract": {
+            "type": "textarea",
+            "rows": 2,
+            "label": "Abstract (optional)",
+            "placeholder": "Enter abstract",
+            "hidden": false
+          }
         }
     }
 }
