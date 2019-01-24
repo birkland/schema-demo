@@ -1,9 +1,11 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://localhost:8080/schemas/global_schema.json",
-    "title": "Publication Details <br><p class=\"lead text-muted\">Please provide additional information about your article/manuscript below. If DOI was provided in the initial step of the submission, the metadata associated with that DOI was found and used to prepopulate this form. </p> <p class=\"lead text-muted\"> <i class=\"glyphicon glyphicon-info-sign\"></i> Fields that are not editable were populated using metadata associated with the provided DOI. </p>",
+    "$id": "http://localhost:8080/schemas/global.json",
+    "title": "JHU global schema",
+    "x-title": "Publication Details <br><p class=\"lead text-muted\">Please provide additional information about your article/manuscript below. If DOI was provided in the initial step of the submission, the metadata associated with that DOI was found and used to prepopulate this form. </p> <p class=\"lead text-muted\"> <i class=\"glyphicon glyphicon-info-sign\"></i> Fields that are not editable were populated using metadata associated with the provided DOI. </p>",
     "type": "object",
     "required": ["title", "journal-title"],
+    "additionalProperties": false,
     "properties": {
         "title": {
             "title": "Article / Manuscript Title",
@@ -13,6 +15,11 @@
         "journal-title": {
             "title": "Journal title",
             "description": "Title of the journal being submitted to",
+            "type": "string"
+        },
+        "journal-NLMTA-ID": {
+            "title": "NTMLA",
+            "description": "NIH ntmla",
             "type": "string"
         },
         "volume": {
@@ -30,7 +37,7 @@
         "publicationDate": {
             "title": "Publication Date",
             "description": "Select your publication date",
-            "format": "datetime"
+            "format": "date-time"
         },
         "abstract": {
             "title": "Abstract",
@@ -87,6 +94,11 @@
                 "placeholder": "Enter the journal title",
                 "hidden": false
             },
+            "journal-NLMTA-ID": {
+                "type": "text",
+                "label": "Journal NLMTA ID",
+                "placeholder": "nlmta"
+            },
             "volume": {
                 "type": "text",
                 "label": "Volume  <small class=\"text-muted\">(optional)</small>",
@@ -112,9 +124,8 @@
                 "hidden": false
             },
             "publicationDate": {
-                "type": "text",
+                "type": "datetime",
                 "label": "Publication Date  <small class=\"text-muted\">(optional)</small>",
-                "placeholder": "mm/dd/yy",
                 "hidden": false
             },
             "abstract": {

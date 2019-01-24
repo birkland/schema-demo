@@ -1,0 +1,85 @@
+<html>
+
+<head>
+    <!-- JSON schema processing -->
+    <script type="text/javascript" src="/scripts/bundle.js"></script>
+
+    <!--JQuery -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <!-- Bootstrap stuff -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <link type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Alpaca -->
+    <link type="text/css" href="//code.cloudcms.com/alpaca/1.5.24/bootstrap/alpaca.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="//code.cloudcms.com/alpaca/1.5.24/bootstrap/alpaca.min.js"></script>
+</head>
+
+<body>
+    <h2>Pre-existing metadata blob:</h2>
+    <pre id="content"></pre>
+
+    <h2>The Alpaca form:</h2>
+    <div id="form1"></div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            // This is the pre-existing metadata blob 
+            var metadataBlob = {
+                "foo": "bar"
+            }
+            $('#content').html(JSON.stringify(metadataBlob, null, 2))
+
+            // Retrieve the schema
+            $.getJSON("/schemas/nihms.json", function (schema) {
+
+                var form = {}
+
+                // Dereference the $refs, sincs Alpaca doesn't do it right
+                deref(schema, function (err, fullSchema) {
+
+                    // Make a defensive copy of the schema for validation, because Alpaca mutates it
+                    fullSchemaClone = JSON.parse(JSON.stringify(fullSchema))
+
+                    // Get the Alpaca form data assembled
+                    form = {
+                        "data": metadataBlob,
+                        "schema": fullSchema.definitions.form,
+                        "options": fullSchema.definitions.options
+                    }
+
+                    // Here, we add an additional Alpaca option so that it displays a button that'll popup 
+                    // validation results
+                    form.options.form = {
+                        "buttons": {
+                            "submit": {
+                                "title": "Send Form Data",
+                                "click": function () {
+                                    var val = this.getValue();
+
+                                    if (this.isValid(true)) {
+                                        alert("Alpaca says the form is valid: " + JSON.stringify(val, null, "  "));
+                                    } else {
+                                        alert("Alpaca says the form is invalid: " + JSON.stringify(val, null, "  "));
+                                    }
+
+                                    $.extend( true, form.data, val );
+
+                                    var v = new Validator();
+                                    console.log(v.validate(form.data, fullSchemaClone));
+                                }
+                            }
+                        }
+                    }
+                    
+                    $("#form1").alpaca(form);
+                });
+            });
+
+        });
+    </script>
+</body>
+
+</html>

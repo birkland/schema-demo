@@ -1,0 +1,29 @@
+{
+    "title": "NIHMS schema",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "form": {
+            "title": "NIH Manuscript Submission System (NIHMS) <br><p class='lead text-muted'>The following metadata fields will be part of the NIHMS submission.</p>",
+            "type": "object",
+            "required": ["journal-NLMTA-ID"],
+            "properties": {
+                "journal-NLMTA-ID": {"$ref": "http://localhost:8080/schemas/global.json#/properties/journal-NLMTA-ID"}
+            }
+        },
+        "prerequisites": {
+            "title": "prerequisites",
+            "type": "object",
+            "required": ["authors"],
+            "properties": {
+                "authors": {"$ref": "http://localhost:8080/schemas/global.json#/properties/authors"}
+            }
+        },
+        "options": {"$ref": "http://localhost:8080/schemas/global.json#/options"}
+    },
+    "allOf": [
+        {"$ref": "http://localhost:8080/schemas/global.json#"},
+        {"$ref": "#/definitions/prerequisites"},
+        {"$ref": "#/definitions/form"}
+    ]
+}

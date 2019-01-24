@@ -1,0 +1,385 @@
+{
+    "title": "NIHMS schema",
+    "type": "object",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "form": {
+            "title": "NIH Manuscript Submission System (NIHMS) <br><p class='lead text-muted'>The following metadata fields will be part of the NIHMS submission.</p>",
+            "type": "object",
+            "required": [
+                "journal-NLMTA-ID"
+            ],
+            "properties": {
+                "journal-NLMTA-ID": {
+                    "title": "NTMLA",
+                    "description": "NIH ntmla",
+                    "type": "string"
+                }
+            }
+        },
+        "prerequisites": {
+            "type": "object",
+            "required": [
+                "authors",
+                "title",
+                "journal-title"
+            ],
+            "properties": {
+                "authors": {
+                    "title": "<div class=\"row\"><div class=\"col-6\">Author(s) <small class=\"text-muted\">(optional)</small> </div><div class=\"col-6 p-0\">ORCID(s)</div></div>",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "title": "Author",
+                        "type": "object",
+                        "properties": {
+                            "author": {
+                                "title": "Name",
+                                "type": "string",
+                                "fieldClass": "body-text col-6 pull-left pl-0"
+                            },
+                            "orcid": {
+                                "title": "ORCiD",
+                                "type": "string",
+                                "fieldClass": "body-text col-6 pull-left pr-0"
+                            },
+                            "role": {
+                                "title": "Role",
+                                "type": "string",
+                                "enum": [
+                                    "PI",
+                                    "CO-PI"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "title": {
+                    "title": "Article / Manuscript Title",
+                    "description": "The title of the individual article or manuscript being submitted",
+                    "type": "string"
+                },
+                "journal-title": {
+                    "title": "Journal title",
+                    "description": "Title of the journal being submitted to",
+                    "type": "string"
+                }
+            }
+        },
+        "options": {
+            "fields": {
+                "title": {
+                    "type": "textarea",
+                    "rows": 2,
+                    "cols": 100,
+                    "label": "Article / Manuscript Title",
+                    "placeholder": "Enter the manuscript title",
+                    "hidden": false
+                },
+                "journal-title": {
+                    "type": "text",
+                    "label": "Journal Title",
+                    "placeholder": "Enter the journal title",
+                    "hidden": false
+                },
+                "journal-NLMTA-ID": {
+                    "type": "text",
+                    "label": "Journal NLMTA ID",
+                    "placeholder": "nlmta"
+                },
+                "volume": {
+                    "type": "text",
+                    "label": "Volume  <small class=\"text-muted\">(optional)</small>",
+                    "placeholder": "Enter the volume",
+                    "hidden": false
+                },
+                "issue": {
+                    "type": "text",
+                    "label": "Issue  <small class=\"text-muted\">(optional)</small>",
+                    "placeholder": "Enter issue",
+                    "hidden": false
+                },
+                "ISSN": {
+                    "type": "text",
+                    "label": "ISSN <small class=\"text-muted\">(optional)</small>",
+                    "placeholder": "ISSN",
+                    "hidden": false
+                },
+                "publisher": {
+                    "type": "text",
+                    "label": "Publisher <small class=\"text-muted\">(optional)</small>",
+                    "placeholder": "Enter the Publisher",
+                    "hidden": false
+                },
+                "publicationDate": {
+                    "type": "datetime",
+                    "label": "Publication Date  <small class=\"text-muted\">(optional)</small>",
+                    "hidden": false
+                },
+                "abstract": {
+                    "type": "textarea",
+                    "label": "Abstract <small class=\"text-muted\">(optional)</small>",
+                    "placeholder": "Enter abstract",
+                    "fieldClass": "clearfix",
+                    "hidden": false
+                },
+                "authors": {
+                    "hidden": false
+                },
+                "under-embargo": {
+                    "type": "checkbox",
+                    "rightLabel": "The material being submitted is published under an embargo.",
+                    "fieldClass": "m-0 mt-4",
+                    "hidden": false
+                },
+                "Embargo-end-date": {
+                    "type": "date",
+                    "label": "Embargo End Date",
+                    "helper": "<i>After the embargo end date, your submission manuscripts or article can be made public. <b>If this publication is not under embargo, please leave this field blank.<b></i>",
+                    "helpersPosition": "above",
+                    "placeholder": "dd/mm/yyyy",
+                    "validate": true,
+                    "inputType": "date",
+                    "fieldClass": "date-time-picker",
+                    "picker": {
+                        "format": "MM/DD/YY",
+                        "allowInputToggle": true
+                    }
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$id": "http://localhost:8080/schemas/global.json",
+            "title": "Publication Details <br><p class=\"lead text-muted\">Please provide additional information about your article/manuscript below. If DOI was provided in the initial step of the submission, the metadata associated with that DOI was found and used to prepopulate this form. </p> <p class=\"lead text-muted\"> <i class=\"glyphicon glyphicon-info-sign\"></i> Fields that are not editable were populated using metadata associated with the provided DOI. </p>",
+            "type": "object",
+            "required": [
+                "title",
+                "journal-title"
+            ],
+            "additionalProperties": false,
+            "properties": {
+                "title": {
+                    "title": "Article / Manuscript Title",
+                    "description": "The title of the individual article or manuscript being submitted",
+                    "type": "string"
+                },
+                "journal-title": {
+                    "title": "Journal title",
+                    "description": "Title of the journal being submitted to",
+                    "type": "string"
+                },
+                "journal-NLMTA-ID": {
+                    "title": "NTMLA",
+                    "description": "NIH ntmla",
+                    "type": "string"
+                },
+                "volume": {
+                    "type": "string"
+                },
+                "issue": {
+                    "type": "string"
+                },
+                "ISSN": {
+                    "type": "string"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "publicationDate": {
+                    "title": "Publication Date",
+                    "description": "Select your publication date",
+                    "format": "date-time"
+                },
+                "abstract": {
+                    "title": "Abstract",
+                    "type": "string",
+                    "description": "The abstract of the journal article being submitted"
+                },
+                "authors": {
+                    "title": "<div class=\"row\"><div class=\"col-6\">Author(s) <small class=\"text-muted\">(optional)</small> </div><div class=\"col-6 p-0\">ORCID(s)</div></div>",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "title": "Author",
+                        "type": "object",
+                        "properties": {
+                            "author": {
+                                "title": "Name",
+                                "type": "string",
+                                "fieldClass": "body-text col-6 pull-left pl-0"
+                            },
+                            "orcid": {
+                                "title": "ORCiD",
+                                "type": "string",
+                                "fieldClass": "body-text col-6 pull-left pr-0"
+                            },
+                            "role": {
+                                "title": "Role",
+                                "type": "string",
+                                "enum": [
+                                    "PI",
+                                    "CO-PI"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "under-embargo": {
+                    "type": "string"
+                },
+                "Embargo-end-date": {
+                    "type": "string",
+                    "format": "date"
+                }
+            },
+            "options": {
+                "fields": {
+                    "title": {
+                        "type": "textarea",
+                        "rows": 2,
+                        "cols": 100,
+                        "label": "Article / Manuscript Title",
+                        "placeholder": "Enter the manuscript title",
+                        "hidden": false
+                    },
+                    "journal-title": {
+                        "type": "text",
+                        "label": "Journal Title",
+                        "placeholder": "Enter the journal title",
+                        "hidden": false
+                    },
+                    "journal-NLMTA-ID": {
+                        "type": "text",
+                        "label": "Journal NLMTA ID",
+                        "placeholder": "nlmta"
+                    },
+                    "volume": {
+                        "type": "text",
+                        "label": "Volume  <small class=\"text-muted\">(optional)</small>",
+                        "placeholder": "Enter the volume",
+                        "hidden": false
+                    },
+                    "issue": {
+                        "type": "text",
+                        "label": "Issue  <small class=\"text-muted\">(optional)</small>",
+                        "placeholder": "Enter issue",
+                        "hidden": false
+                    },
+                    "ISSN": {
+                        "type": "text",
+                        "label": "ISSN <small class=\"text-muted\">(optional)</small>",
+                        "placeholder": "ISSN",
+                        "hidden": false
+                    },
+                    "publisher": {
+                        "type": "text",
+                        "label": "Publisher <small class=\"text-muted\">(optional)</small>",
+                        "placeholder": "Enter the Publisher",
+                        "hidden": false
+                    },
+                    "publicationDate": {
+                        "type": "datetime",
+                        "label": "Publication Date  <small class=\"text-muted\">(optional)</small>",
+                        "hidden": false
+                    },
+                    "abstract": {
+                        "type": "textarea",
+                        "label": "Abstract <small class=\"text-muted\">(optional)</small>",
+                        "placeholder": "Enter abstract",
+                        "fieldClass": "clearfix",
+                        "hidden": false
+                    },
+                    "authors": {
+                        "hidden": false
+                    },
+                    "under-embargo": {
+                        "type": "checkbox",
+                        "rightLabel": "The material being submitted is published under an embargo.",
+                        "fieldClass": "m-0 mt-4",
+                        "hidden": false
+                    },
+                    "Embargo-end-date": {
+                        "type": "date",
+                        "label": "Embargo End Date",
+                        "helper": "<i>After the embargo end date, your submission manuscripts or article can be made public. <b>If this publication is not under embargo, please leave this field blank.<b></i>",
+                        "helpersPosition": "above",
+                        "placeholder": "dd/mm/yyyy",
+                        "validate": true,
+                        "inputType": "date",
+                        "fieldClass": "date-time-picker",
+                        "picker": {
+                            "format": "MM/DD/YY",
+                            "allowInputToggle": true
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "type": "object",
+            "required": [
+                "authors",
+                "title",
+                "journal-title"
+            ],
+            "properties": {
+                "authors": {
+                    "title": "<div class=\"row\"><div class=\"col-6\">Author(s) <small class=\"text-muted\">(optional)</small> </div><div class=\"col-6 p-0\">ORCID(s)</div></div>",
+                    "type": "array",
+                    "uniqueItems": true,
+                    "items": {
+                        "title": "Author",
+                        "type": "object",
+                        "properties": {
+                            "author": {
+                                "title": "Name",
+                                "type": "string",
+                                "fieldClass": "body-text col-6 pull-left pl-0"
+                            },
+                            "orcid": {
+                                "title": "ORCiD",
+                                "type": "string",
+                                "fieldClass": "body-text col-6 pull-left pr-0"
+                            },
+                            "role": {
+                                "title": "Role",
+                                "type": "string",
+                                "enum": [
+                                    "PI",
+                                    "CO-PI"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "title": {
+                    "title": "Article / Manuscript Title",
+                    "description": "The title of the individual article or manuscript being submitted",
+                    "type": "string"
+                },
+                "journal-title": {
+                    "title": "Journal title",
+                    "description": "Title of the journal being submitted to",
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "title": "NIH Manuscript Submission System (NIHMS) <br><p class='lead text-muted'>The following metadata fields will be part of the NIHMS submission.</p>",
+            "type": "object",
+            "required": [
+                "journal-NLMTA-ID"
+            ],
+            "properties": {
+                "journal-NLMTA-ID": {
+                    "title": "NTMLA",
+                    "description": "NIH ntmla",
+                    "type": "string"
+                }
+            }
+        }
+    ]
+}

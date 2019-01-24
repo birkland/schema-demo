@@ -1,2 +1,2 @@
 #/bin/sh
-browserify -p tinyify init.js -o bundle.js
+browserify init.js -o scripts/bundle.js
