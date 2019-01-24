@@ -65,15 +65,24 @@
                                         alert("Alpaca says the form is invalid: " + JSON.stringify(val, null, "  "));
                                     }
 
-                                    $.extend( true, form.data, val );
+                                    $.extend(true, form.data, val);
 
                                     var v = new Validator();
-                                    console.log(v.validate(form.data, fullSchemaClone));
+                                    var result = v.validate(form.data, fullSchemaClone);
+                                    if (result.valid) {
+                                        alert("Schema validatation passed: " + JSON.stringify(result.instance, null, "  "))
+                                    } else {
+                                        message = ""
+                                        jQuery.each(result.errors, function (index, error) {
+                                            message += error.message + "\n"
+                                        });
+                                        alert("Schema validation failed: " + JSON.stringify(result.instance, null, "  ") + "\n" + message)
+                                    }
                                 }
                             }
                         }
                     }
-                    
+
                     $("#form1").alpaca(form);
                 });
             });
