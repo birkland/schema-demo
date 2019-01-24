@@ -23,7 +23,7 @@ To run the demo:
 
 Point your browser to `http://localhost:8080/forms/nihms.html`
 
-This renders the an Alpaca form (located in `forms/hihms.html`) based on the schema `schemas/nihms.html`.  Look at the html file, ant try it!
+This renders the an Alpaca form (located in `forms/hihms.html`) based on the schema `schemas/nihms.json`.  Look at the html file, ant try it!
 
 When you enter something in the NLMTA field and click the "Send Form Data" button,a popup will appear, showing validation status.  The demo starts with a metadata blob that is *invalid* with respect to the global schema:  it contains a field "foo" not defined in the global schema, and it is also missing required fields.
 
